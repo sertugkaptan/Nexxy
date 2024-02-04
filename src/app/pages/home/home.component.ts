@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
   constructor(private service:MovieApiServiceService){
   }
 
+  bannerResult:any=[];
+
   ngOnInit(): void {
     this.bannerData();
   }
@@ -18,6 +20,7 @@ export class HomeComponent implements OnInit {
   bannerData(){
     this.service.bannerApiData().subscribe((result)=>{
       console.log(result, 'bannerresult#');
+      this.bannerResult = result.results;
     })
   }
 
