@@ -5,24 +5,24 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NgStyle,RouterLink],
+  imports: [RouterOutlet, NgStyle, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Nexxy';
-  navbg:any;
+  navbg: any;
 
-  @HostListener('document:scroll') 
-  scrollOver(){
-    console.log(document.body.scrollTop,"scrolllength#");
+  @HostListener('document:scroll')
+  scrollOver() {
+    console.log(document.body.scrollTop, "scrolllength#");
 
-    if(document.body.scrollTop > 0 || document.documentElement.scrollTop>0){
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navbg = {
-        'background-color':'#000000'
+        'background-color': '#000000'
       }
-    }else{
-      this.navbg={}
+    } else {
+      this.navbg = {}
     }
   }
 }
