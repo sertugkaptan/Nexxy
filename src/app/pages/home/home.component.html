@@ -6,8 +6,8 @@
                 [ngClass]="{active:i===1}">
                 <img src="https://image.tmdb.org/t/p/original/{{b.backdrop_path}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{b.title}}</h5>
-                    <p>{{b.overview}}</p>
+                    <h2>{{b.original_title}}</h2>
+                    <p style="font-size: 25px;">{{b.overview}}</p>
                 </div>
             </div>
         </div>
@@ -22,3 +22,19 @@
     </div>
 </div>
 <!-- banner end  -->
+
+<div class="contain mt-3 p-3">
+
+    <!-- trending Movies -->
+    <div class="row">
+        <h5 class="text-white">Trending Movies</h5>
+        <div class="carousel-item active" data-bs-interval="10000" *ngFor="let t of trendingResult;let i=index"
+        [ngClass]="{active:i===1}">
+            <img src="https://image.tmdb.org/t/p/original/{{t.backdrop_path}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <!-- <h2>{{b.original_title}}</h2>
+                <p style="font-size: 25px;">{{b.overview}}</p> -->
+            </div>
+        </div>
+    </div>
+</div>

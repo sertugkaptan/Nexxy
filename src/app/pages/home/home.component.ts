@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,NgClass],
+  imports: [CommonModule, NgClass],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
   }
 
   bannerResult: any = [];
+  trendingResult: any = [];
 
   ngOnInit(): void {
     this.bannerData();
+    this.trendingData();
   }
 
   bannerData() {
@@ -25,6 +27,13 @@ export class HomeComponent implements OnInit {
       console.log(result, 'bannerresult#');
       this.bannerResult = result.results;
     })
+  }
+
+  trendingData() {
+    this.service.trendingMovieApiData().subscribe((result) => {
+      console.log(result, 'trendingresult#')
+      this.trendingResult = result.result
+    });
   }
 
 }
