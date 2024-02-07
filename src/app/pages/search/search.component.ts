@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-search',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
-export class SearchComponent implements OnInit{
-  constructor(){}
-  ngOnInit(): void {
-  }
+export class SearchComponent {
 
-  searchForm= new FormGroup({
-    'movieName':new FormControl(null)
+  searchForm = new FormGroup({
+    'movieName': new FormControl(null)
   });
+
+  submitForm() {
+    console.log(this.searchForm.value,'searchform#');
+  }
 }

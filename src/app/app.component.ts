@@ -1,11 +1,11 @@
 import { NgStyle } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule, NgStyle, RouterLink],
+  imports: [RouterOutlet, ReactiveFormsModule,FormsModule, NgStyle, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
