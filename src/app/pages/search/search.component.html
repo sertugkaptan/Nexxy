@@ -2,7 +2,8 @@
     <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
         <div class="row">
             <div class="mb-3 col-lg-10">
-                <input type="text" class="form-control" formControlName="movieName" placeholder="Search Movie Title Here...">
+                <input type="text" class="form-control" formControlName="movieName"
+                    placeholder="Search Movie Title Here...">
             </div>
             <div class="col-lg-2">
                 <button type="submit" class="btn btn-md">Search</button>
@@ -11,14 +12,16 @@
     </form>
 </div>
 
-<div class="contain mt-3 p-3">
-    <!-- trending Movies -->
-    <div class="row">
-        <h5 class="text-white">Search Results</h5>
-        <div class="rowposter mt-3 p-3" data-bs-interval="10000">
-            <ng-container *ngFor="let r of searchResult; let i =  index;">
+<!-- trending Movies -->
+<div class="row mt-5">
+    <div class="col-lg-4" *ngFor="let r of searchResult; let i =  index;">
+        <div class="row">
+            <div class="col-lg-3">
                 <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="...">
-            </ng-container>
+            </div>
+            <div class="col-lg-9">
+                <h1>{{r.original_title}}</h1>
+            </div>
         </div>
     </div>
 </div>
