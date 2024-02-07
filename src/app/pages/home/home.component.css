@@ -34,7 +34,7 @@
 
 .rowimg:hover{
     transform: scale(1.1);
-    cursor: grab;
+    cursor: pointer;
 }
 
 .largeposter{
