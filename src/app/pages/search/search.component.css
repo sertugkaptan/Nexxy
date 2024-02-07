@@ -1,10 +1,18 @@
-button{
+button {
     background-color: #e50914;
     color: #ffffff;
 }
 
-button:hover{
+button:hover {
     background-color: #ff9494;
     color: #ffffff;
     cursor: pointer;
+}
+
+img {
+    width: 100%;
+}
+
+h5{
+    color: #ffffff;
 }
