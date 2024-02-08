@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
 
 @Component({
@@ -9,19 +10,18 @@ import { MovieApiServiceService } from '../../service/movie-api-service.service'
   styleUrl: './movie-details.component.css'
 })
 export class MovieDetailsComponent implements OnInit {
-  constructor(private service: MovieApiServiceService) { }
+  constructor(private service: MovieApiServiceService, private router: ActivatedRoute) { }
+  detailResult: any;
 
   ngOnInit(): void {
-    this.getMovieDetails(this.movieId);
+    let movieId = this.router.snapshot.paramMap.get('id');
+    this.getMovieDetails(movieId);
   }
 
-  movieId: any;
-  detailResult:any = [];
-
-  getMovieDetails(data:any) {
-    this.service.searchMovie(data).subscribe((result)=>{
-      console.log(result.results, 'detailresult#')
-      this.detailResult= result.results
+  getMovieDetails(data: any) {
+    this.service.searchMovie(data).subscribe(async(result) => {
+      console.log(result.results, 'detailresult#');
+      this.detailResult = await result;
     })
   }
 
