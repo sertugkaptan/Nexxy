@@ -30,7 +30,8 @@
         <h5 class="text-white">Trending Movies</h5>
         <div class="rowposter mt-3 p-3" data-bs-interval="10000">
             <ng-container *ngFor="let t of trendingResult">
-                <img src="https://image.tmdb.org/t/p/original/{{t.poster_path}}" class="rowimg largeposter" alt="...">
+                <img src="https://image.tmdb.org/t/p/original/{{t.poster_path}}" class="rowimg largeposter" alt="..."
+                [routerLink]="['/movie',t.id]">
             </ng-container>
         </div>
     </div>

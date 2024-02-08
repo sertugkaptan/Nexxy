@@ -10,18 +10,18 @@
             </div>
         </div>
     </form>
-</div>
-
-<!-- trending Movies -->
-<div class="row mt-5">
-    <div class="col-lg-4" *ngFor="let r of searchResult">
-        <div class="row" *ngIf="r.poster_path">
-            <div class="col-lg-3 mt-3 mb-3" >
-                <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="...">
-            </div>
-            <div class="col-lg-9 mt-4 mb-4">
-                <h5>{{r.original_title}}</h5>
+    <div class="row mt-5">
+        <div class="col-lg-4" *ngFor="let r of searchResult">
+            <div class="row" *ngIf="r.poster_path">
+                <div class="col-lg-3 mt-3 mb-3" >
+                    <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="...">
+                </div>
+                <div class="col-lg-9 mt-4 mb-4">
+                    <h5>{{r.original_title}}</h5>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- trending Movies -->

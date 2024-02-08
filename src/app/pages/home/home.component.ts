@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
 import { NgClass } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgClass],
+  imports: [CommonModule, NgClass,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
