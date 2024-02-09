@@ -14,13 +14,15 @@ export class MovieDetailsComponent implements OnInit {
   detailResult: any;
 
   ngOnInit(): void {
-    let movieId = this.router.snapshot.paramMap.get('id');
-    this.getMovieDetails(movieId);
+    console.log(this.router.snapshot);
+    let getParamId = this.router.snapshot.paramMap.get('id');
+    console.log(getParamId)
+    this.getMovieDetails(getParamId);
   }
 
-  getMovieDetails(data: any) {
-    this.service.searchMovie(data).subscribe(async(result) => {
-      console.log(result.results, 'detailresult#');
+  getMovieDetails(id: any) {
+    this.service.movieDetails(id).subscribe(async(result) => {
+      console.log(result, 'detailresult#');
       this.detailResult = await result;
     })
   }
