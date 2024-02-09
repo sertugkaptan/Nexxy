@@ -24,12 +24,19 @@ export class MovieApiServiceService {
     return this.http.get(`${this.baseurl}/trending/movie/day?api_key=${this.apikey}`);
   }
 
-  searchMovie(data:any):Observable<any>{
+  searchMovieWithName(data:any):Observable<any>{
     return this.http.get(`${this.baseurl}/search/movie?api_key=${this.apikey}&query=${data.movieName}`);
   }
 
-  movieDetails(data:any):Observable<any>{
+  getMovie(data:any):Observable<any>{
     return this.http.get(`${this.baseurl}/movie/${data}?api_key=${this.apikey}`);
   }
 
+  getMovieVideo(data:any):Observable<any>{
+    return this.http.get(`${this.baseurl}/movie/${data}/videos?api_key=${this.apikey}`);
+  }
+
+  getMovieCast(data:any):Observable<any>{
+    return this.http.get(`${this.baseurl}/movie/${data}/credits?api_key=${this.apikey}`);
+  }
 }

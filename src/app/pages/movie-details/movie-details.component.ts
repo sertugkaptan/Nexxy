@@ -1,30 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
-
+import { CommonModule } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafePipe } from '../../util/SafePipe';
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
 })
 export class MovieDetailsComponent implements OnInit {
-  constructor(private service: MovieApiServiceService, private router: ActivatedRoute) { }
+  constructor(private service: MovieApiServiceService, private router: ActivatedRoute,private sanitizer:DomSanitizer) { }
   detailResult: any;
+  videoResult:any;
+  castResult:any;
+  videoLink:string="https://www.youtube.com/embed/";
 
   ngOnInit(): void {
-    console.log(this.router.snapshot);
     let getParamId = this.router.snapshot.paramMap.get('id');
-    console.log(getParamId)
-    this.getMovieDetails(getParamId);
+    this.constructMovieInformation(getParamId);
+  }
+
+  constructMovieInformation(id:any){
+    this.getMovieDetails(id);
+    this.getVideo(id);
+    this.getCast(id);
   }
 
   getMovieDetails(id: any) {
-    this.service.movieDetails(id).subscribe(async(result) => {
-      console.log(result, 'detailresult#');
+    this.service.getMovie(id).subscribe(async (result) => {
       this.detailResult = await result;
     })
   }
 
+  getVideo(id:any){
+    this.service.getMovieVideo(id).subscribe((result) => {
+      result.results.forEach((element:any) => {
+        if(element.type == "Trailer"){
+          let safeUrl = new SafePipe(this.sanitizer).transform(this.videoLink+element.key);
+
+          this.videoResult= safeUrl; 
+          console.log(this.videoResult)
+        }
+      });
+    })
+  }
+
+  getCast(id:any){
+    this.service.getMovieCast(id).subscribe(async (result) => {
+      this.castResult = await result.cast;
+    })
+  }
 }
