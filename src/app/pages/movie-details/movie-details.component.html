@@ -10,8 +10,17 @@
             <img src="https://image.tmdb.org/t/p/original/{{detailResult.poster_path}}">
         </div>
         <div class="col-lg-8 mt-1">
-            <h1 class="mt-5 mb-3">{{detailResult.original_title}}</h1>
-            <p class="mt-5 mb-5">{{detailResult.overview}}</p>
+            <h1 class="mt-7 mb-3">{{detailResult.original_title}}</h1>
+            <h3 class="mt-2 mb-5">{{detailResult.overview}}</h3>
+            <div>
+                <h1>Cast Members</h1>
+            </div>
+            <div>
+                <span>Cast:</span>
+                <div class="rows" *ngFor="let cast of castResult">
+                    <p>"{{cast.name}}", </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

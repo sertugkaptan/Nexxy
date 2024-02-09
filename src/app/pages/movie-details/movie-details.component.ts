@@ -17,7 +17,7 @@ export class MovieDetailsComponent implements OnInit {
   videoResult: any;
   castResult: any;
   youtubeLink: string = "https://www.youtube.com/embed/";
-  autoPlay: string = "?autoplay=1";
+  autoPlay: string = "?autoplay=1&mute=1";
   ngOnInit(): void {
     let getParamId = this.router.snapshot.paramMap.get('id');
     this.constructMovieInformation(getParamId);
@@ -39,9 +39,7 @@ export class MovieDetailsComponent implements OnInit {
     this.service.getMovieVideo(id).subscribe((result) => {
       result.results.forEach((element: any) => {
         if (element.type == "Trailer") {
-          let safeUrl = new SafePipe(this.sanitizer).transform(this.youtubeLink + element.key + this.autoPlay);
-          this.videoResult = safeUrl;
-          console.log(this.videoResult)
+          this.videoResult = new SafePipe(this.sanitizer).transform(this.youtubeLink + element.key + this.autoPlay );
         }
       });
     })
@@ -49,7 +47,7 @@ export class MovieDetailsComponent implements OnInit {
 
   getCast(id: any) {
     this.service.getMovieCast(id).subscribe(async (result) => {
-      this.castResult = await result.cast;
+      this.castResult = result.cast.slice(0,10);
     })
   }
 }

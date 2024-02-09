@@ -5,17 +5,25 @@ img{
 
 h1{
     color: #ffffff;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     align-content: center;
 }
 
-p{
-    font-size: 20px;
+h3{
     color: #ffffff;
+
 }
 
 iframe{
     width: 100%; 
     height: 900px;
+}
+.rows{
+    display: inline-block;
+    color: #ffffff;
+}
+
+span{
+    color: #c7c7c7d3;
 }
