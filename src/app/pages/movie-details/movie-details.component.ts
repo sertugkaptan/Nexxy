@@ -12,18 +12,18 @@ import { SafePipe } from '../../util/SafePipe';
   styleUrl: './movie-details.component.css'
 })
 export class MovieDetailsComponent implements OnInit {
-  constructor(private service: MovieApiServiceService, private router: ActivatedRoute,private sanitizer:DomSanitizer) { }
+  constructor(private service: MovieApiServiceService, private router: ActivatedRoute, private sanitizer: DomSanitizer) { }
   detailResult: any;
-  videoResult:any;
-  castResult:any;
-  videoLink:string="https://www.youtube.com/embed/";
-
+  videoResult: any;
+  castResult: any;
+  youtubeLink: string = "https://www.youtube.com/embed/";
+  autoPlay: string = "?autoplay=1";
   ngOnInit(): void {
     let getParamId = this.router.snapshot.paramMap.get('id');
     this.constructMovieInformation(getParamId);
   }
 
-  constructMovieInformation(id:any){
+  constructMovieInformation(id: any) {
     this.getMovieDetails(id);
     this.getVideo(id);
     this.getCast(id);
@@ -35,20 +35,19 @@ export class MovieDetailsComponent implements OnInit {
     })
   }
 
-  getVideo(id:any){
+  getVideo(id: any) {
     this.service.getMovieVideo(id).subscribe((result) => {
-      result.results.forEach((element:any) => {
-        if(element.type == "Trailer"){
-          let safeUrl = new SafePipe(this.sanitizer).transform(this.videoLink+element.key);
-
-          this.videoResult= safeUrl; 
+      result.results.forEach((element: any) => {
+        if (element.type == "Trailer") {
+          let safeUrl = new SafePipe(this.sanitizer).transform(this.youtubeLink + element.key + this.autoPlay);
+          this.videoResult = safeUrl;
           console.log(this.videoResult)
         }
       });
     })
   }
 
-  getCast(id:any){
+  getCast(id: any) {
     this.service.getMovieCast(id).subscribe(async (result) => {
       this.castResult = await result.cast;
     })
