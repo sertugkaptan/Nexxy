@@ -20,3 +20,19 @@ p{
     color: #ffffff;
     font-size: 15px;
 }
+.rowimg:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+}
+.rowimg{
+    max-height: 200px;
+    object-fit: contain;
+    width: 100%;
+    box-sizing: content-box;
+    transition: transform 450ms;
+    margin-right: 7px;
+}
+.rowposter {
+    display: flex;
+    flex-wrap: wrap; 
+}

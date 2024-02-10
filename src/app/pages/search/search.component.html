@@ -1,6 +1,6 @@
 <div class="containt-fluid mt-5 p-5">
     <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
-        <div class="row">
+        <div class="row" style="align-items: center;">
             <div class="mb-3 col-lg-10">
                 <input type="text" class="form-control" formControlName="movieName"
                     placeholder="Search Movie Title Here...">
@@ -13,8 +13,9 @@
     <div class="row mt-5">
         <div class="col-lg-4" *ngFor="let r of searchResult">
             <div class="row" *ngIf="r.poster_path">
-                <div class="col-lg-3 mt-3 mb-3" >
-                    <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="...">
+                <div class="col-lg-3 mt-3 mb-3">
+                    <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter"
+                        alt="..." [routerLink]="['/movie',r.id]">
                 </div>
                 <div class="col-lg-9 mt-4 mb-4">
                     <h5>{{r.original_title}}</h5>
@@ -26,3 +27,12 @@
 </div>
 
 <!-- trending Movies -->
+<div class="row mt-5">
+    <h1 >Trending Movies</h1>
+    <div class="col-lg-1 mt-3" *ngFor="let r of trendingMovies">
+        <div class="row" *ngIf="r.poster_path">
+            <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="..."
+                [routerLink]="['/movie',r.id]">
+        </div>
+    </div>
+</div>
