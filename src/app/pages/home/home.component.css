@@ -43,3 +43,13 @@
 .rowposter::-webkit-scrollbar{
     display: none;
 }
+.caption{
+    color: #ffffff;
+    font-size: 50px;
+}
+
+ .carousel-inner .trendingcarousel .carousel-item img{
+    height: 300px;
+    width: 300px;
+    object-fit: fill;
+}
