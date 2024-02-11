@@ -48,8 +48,18 @@
     font-size: 50px;
 }
 
- .carousel-inner .trendingcarousel .carousel-item img{
-    height: 300px;
-    width: 300px;
-    object-fit: fill;
+.carousel-inner .trendingcarousel .carousel-item img{
+    height: 400px;
+    width: 450px;
+}
+
+.carousel-inner .trendingcarousel .carousel-item .items .item{
+    display: inline-block;
+    max-width: 460px;
+    padding: 30px;
+    text-align: center;
+}
+.carousel-inner .trendingcarousel .carousel-item .items img:hover{
+    transform: scale(1.5);
+    transition: 400ms;
 }
