@@ -10,3 +10,6 @@ export const routes: Routes = [
     {path:'movie/:id',component:MovieDetailsComponent}
 ];
 
+export const HOME_ROUTE= '';
+export const SEARCH_ROUTE='search';
+export const MOVIE_ROUTE='movie';

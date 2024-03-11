@@ -1,55 +1,65 @@
 .carousel-inner {
-    height: 700px;
+  height: 700px;
 }
 
 .carousel-inner .carousel-item img {
-    height: 700px;
-    object-fit: cover;
+  height: 700px;
+  object-fit: cover;
 }
 
 .carousel-caption h2 {
-    color: #e50914;
-    font-weight: bold;
-    font-size: 50px;
+  color: #e50914;
+  font-weight: bold;
 }
 
 .carousel-caption p {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .rowposter {
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
-.rowimg{
-    max-height: 200px;
-    object-fit: contain;
-    width: 100%;
-    box-sizing: content-box;
-    transition: transform 450ms;
-    margin-right: 7px;
+.rowimg {
+  max-height: 200px;
+  object-fit: contain;
+  width: 100%;
+  box-sizing: content-box;
+  transition: transform 450ms;
+  margin-right: 7px;
 }
 
-.rowimg:hover{
-    transform: scale(1.1);
-    cursor: grab;
+.rowimg:hover {
+  transform: scale(1.1);
+  cursor: grab;
 }
 
-.largeposter{
-    max-height: 300px;
+.largeposter {
+  max-height: 300px;
 }
-.rowposter::-webkit-scrollbar{
-    display: none;
+.caption {
+  color: #ffffff;
+  font-size: 50px;
 }
-.caption{
-    color: #ffffff;
-    font-size: 50px;
+.card {
+  background-color: grey;
 }
-
- .carousel-inner .trendingcarousel .carousel-item img{
-    height: 300px;
-    width: 300px;
-    object-fit: fill;
+.card .row .col-md-4 img {
+  height: 500px;
+  position: relative;
 }
+.col-md-4 h2 {
+  color: red;
+  position: absolute;
+  text-align: center;
+  bottom: 10%;
+}
+/* #trendingmoviecarousel {
+  position: relative;
+} */
+/* .carousel-controls-left-right{
+  position: relative;
+  top: 50%;
+} */

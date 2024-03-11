@@ -15,7 +15,7 @@
             <div class="row" *ngIf="r.poster_path">
                 <div class="col-lg-3 mt-3 mb-3">
                     <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter"
-                        alt="..." [routerLink]="['/movie',r.id]">
+                        alt="..." [routerLink]="[MOVIE_ROUTE,r.id]">
                 </div>
                 <div class="col-lg-9 mt-4 mb-4">
                     <h5>{{r.original_title}}</h5>
@@ -32,7 +32,7 @@
     <div class="col-lg-1 mt-3" *ngFor="let r of trendingMovies">
         <div class="row" *ngIf="r.poster_path">
             <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="..."
-                [routerLink]="['/movie',r.id]">
+                [routerLink]="[MOVIE_ROUTE,r.id]">
         </div>
     </div>
 </div>

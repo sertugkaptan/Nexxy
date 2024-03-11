@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { SharedModule } from '../../util/SharedModule.module';
+import { MOVIE_ROUTE } from '../../app.routes';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, SharedModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit {
+  readonly MOVIE_ROUTE = MOVIE_ROUTE;
   searchResult: any;
   trendingMovies: any = [];
-
   constructor(private service: MovieApiServiceService) { }
   
   ngOnInit(): void {
@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
 
   searchForm = new FormGroup({
     'movieName': new FormControl(null)
+
   });
 
   submitForm() {

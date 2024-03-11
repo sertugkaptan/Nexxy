@@ -1,52 +1,125 @@
 <!-- banner start -->
 <div class="containt-fluid">
-    <div id="carouselExampleDark" class="carousel carousel-dark slide">
-        <div class="carousel-inner">
-            <div class="carousel-item " data-bs-interval="10000" *ngFor="let b of bannerResult;let i=index"
-                [ngClass]="{active:i===1}">
-                <img src="https://image.tmdb.org/t/p/original/{{b.backdrop_path}}" class="d-block w-100" alt="..." [routerLink]="['/movie',b.id]">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>{{b.original_title}}</h2>
-                    <p style="font-size: 25px;">{{b.overview}}</p>
-                </div>
-            </div>
+  <div id="carouselExampleDark" class="carousel carousel-dark slide">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        data-bs-interval="10000"
+        *ngFor="let b of bannerResult; let i = index"
+        [ngClass]="{ active: i === 1 }"
+      >
+        <img
+          src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path }}"
+          class="d-block w-100"
+          alt="..."
+          [routerLink]="[MOVIE_ROUTE, b.id]"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h2>{{ b.original_title }}</h2>
+          <p style="font-size: 25px">{{ b.overview }}</p>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+      </div>
     </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
 <!-- banner end  -->
-
-<div class="contain mt-3 p-3">
-    <!-- trending Movies -->
-    <h1 class="caption mt-7">Trending Movies right now</h1>
-    <div id="trendingmoviecarousel" class="carousel carousel-dark slide mt-3">
-        <div class="carousel-inner">
-            <div class="trendingcarousel">
-
-                <div class="carousel-item" data-bs-interval="10000" *ngFor="let b of trendingResult;let i=index"
-                    [ngClass]="{active:i===1}">
-                    <img src="https://image.tmdb.org/t/p/original/{{b.backdrop_path}}" class="d-block w-100" alt="..."  [routerLink]="['/movie',b.id]">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2>{{b.original_title}}</h2>
-                        <p style="font-size: 25px;">{{b.overview}}</p>
-                    </div>
-                </div>
+<h1 class="caption mt-7">Trending Movies right now</h1>
+<div
+  id="trendingmoviecarousel"
+  class="carousel carousel-dark slide mt-3"
+  style="display: flex"
+>
+  <div class="carousel-inner">
+    <div class="trendingcarousel">
+      <div class="carousel-item active">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-img">
+              <img
+                src="https://image.tmdb.org/t/p/original/{{
+                  carouselItems[0].poster_path
+                }}"
+                class="d-block w-100"
+                alt="..."
+                [routerLink]="[MOVIE_ROUTE, carouselItems[0].id]"
+              />
             </div>
+            <h2>{{ carouselItems[0].original_title }}</h2>
+          </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#trendingmoviecarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#trendingmoviecarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-img">
+              <img
+                src="https://image.tmdb.org/t/p/original/{{
+                  carouselItems[1].poster_path
+                }}"
+                class="d-block w-100"
+                alt="..."
+                [routerLink]="[MOVIE_ROUTE, carouselItems[1].id]"
+              />
+            </div>
+            <h2>{{ carouselItems[1].original_title }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-img">
+              <img
+                src="https://image.tmdb.org/t/p/original/{{
+                  carouselItems[2].poster_path
+                }}"
+                class="d-block w-100"
+                alt="..."
+                [routerLink]="[MOVIE_ROUTE, carouselItems[2].id]"
+              />
+            </div>
+            <h2>{{ carouselItems[2].original_title }}</h2>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="carousel-controls-left-right">
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#trendingmoviecarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#trendingmoviecarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>

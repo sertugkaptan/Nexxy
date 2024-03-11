@@ -6,5 +6,9 @@ import { routes } from './app.routes';
 import { MovieApiServiceService } from './service/movie-api-service.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),importProvidersFrom(HttpClientModule),MovieApiServiceService]
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(HttpClientModule),
+    MovieApiServiceService,
+  ],
 };

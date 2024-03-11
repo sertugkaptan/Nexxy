@@ -1,40 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
-import { NgClass } from '@angular/common';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { SharedModule } from '../../util/SharedModule.module';
+import { MOVIE_ROUTE } from '../../app.routes';
+import { Movie } from '../../util/Movie';
+import { Subscription } from 'rxjs';
+import { slideInAnimation } from '../../app.animation';
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgClass,RouterLink],
+  animations: [slideInAnimation],
+  imports: [SharedModule, NgClass, RouterOutlet],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
-
-  constructor(private service: MovieApiServiceService) {
-  }
-
-  bannerResult: any = [];
-  trendingResult: any = [];
+export class HomeComponent implements OnInit, OnDestroy {
+  readonly MOVIE_ROUTE = MOVIE_ROUTE;
+  carouselItems: Movie[] = [];
+  nextItems: Movie[] = [];
+  bannerResult: Movie[] = [];
+  trendingResult: Movie[] = [];
+  bannerSub: Subscription | undefined;
+  trendingSub: Subscription | undefined;
+  state: string = 'void';
+  
+  constructor(
+    private service: MovieApiServiceService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.bannerData();
     this.trendingData();
   }
 
-  bannerData() {
-    this.service.bannerApiData().subscribe((result) => {
-      console.log(result, 'bannerresult#');
-      this.bannerResult = result.results;
-    })
+  ngOnDestroy(): void {
+    this.bannerSub?.unsubscribe();
+    this.trendingSub?.unsubscribe();
   }
-
-  trendingData() {
-    this.service.trendingMovieApiData().subscribe((result) => {
-      console.log(result, 'trendingresult#')
-      this.trendingResult = result.results;
+  bannerData() {
+    this.bannerSub = this.service.bannerApiData().subscribe((data) => {
+      this.bannerResult = data.results!;
     });
   }
 
+  trendingData(): void {
+    this.trendingSub = this.service.trendingMovieApiData().subscribe((data) => {
+      this.carouselItems = data.results.slice(0, 3);
+      this.trendingResult = data.results!;
+    });
+  }
 }
