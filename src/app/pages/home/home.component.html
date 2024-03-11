@@ -6,17 +6,17 @@
         class="carousel-item"
         data-bs-interval="10000"
         *ngFor="let b of bannerResult; let i = index"
-        [ngClass]="{ active: i === 1 }"
+        [ngClass]="{ active: i === 0 }"
       >
         <img
-          src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path }}"
+          src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path || '' }}"
           class="d-block w-100"
           alt="..."
           [routerLink]="[MOVIE_ROUTE, b.id]"
         />
         <div class="carousel-caption d-none d-md-block">
-          <h2>{{ b.original_title }}</h2>
-          <p style="font-size: 25px">{{ b.overview }}</p>
+          <h2>{{ b.original_title || "Unknown Title" }}</h2>
+          <p style="font-size: 25px">{{ b.overview || "Unknown overview" }}</p>
         </div>
       </div>
     </div>
@@ -41,68 +41,51 @@
   </div>
 </div>
 <!-- banner end  -->
-<h1 class="caption mt-7">Trending Movies right now</h1>
-<div
-  id="trendingmoviecarousel"
-  class="carousel carousel-dark slide mt-3"
-  style="display: flex"
->
-  <div class="carousel-inner">
-    <div class="trendingcarousel">
-      <div class="carousel-item active">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img">
-              <img
-                src="https://image.tmdb.org/t/p/original/{{
-                  carouselItems[0].poster_path
-                }}"
-                class="d-block w-100"
-                alt="..."
-                [routerLink]="[MOVIE_ROUTE, carouselItems[0].id]"
-              />
+<!-- Your HTML template -->
+<h1 style="color: white">Currently Trending Movies</h1>
+<div *ngIf="carouselItems && carouselItems.length > 0">
+  <div id="trendingmoviecarousel" class="carousel carousel-dark slide mt-3">
+    <div class="carousel-inner">
+      <div
+        class="trendingcarousel"
+        *ngFor="let slice of carouselItems | chunkArray : 6; let i = index"
+      >
+        <div class="carousel-item" [ngClass]="{ active: i === 0 }">
+          <div class="row">
+            <div class="col-md-2" *ngFor="let item of slice">
+              <div class="card">
+                <div class="card-img">
+                  <div
+                    class="video-container"
+                    (mouseleave)="playVideo(item.id)"
+                  >
+                    <!-- Ensure item is properly accessed -->
+                    <img
+                      src="https://image.tmdb.org/t/p/original/{{
+                        item.poster_path || ''
+                      }}"
+                      class="d-block w-100"
+                      alt="..."
+                      [routerLink]="[MOVIE_ROUTE, item.id]"
+                    />
+                    <div *ngIf="showVideo" class="video-overlay">
+                      <iframe
+                        *ngIf="youtubeUrl"
+                        width="560"
+                        height="315"
+                        [src]="youtubeUrl | safe"
+                        frameborder="0"
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2>{{ carouselItems[0].original_title }}</h2>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img">
-              <img
-                src="https://image.tmdb.org/t/p/original/{{
-                  carouselItems[1].poster_path
-                }}"
-                class="d-block w-100"
-                alt="..."
-                [routerLink]="[MOVIE_ROUTE, carouselItems[1].id]"
-              />
-            </div>
-            <h2>{{ carouselItems[1].original_title }}</h2>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img">
-              <img
-                src="https://image.tmdb.org/t/p/original/{{
-                  carouselItems[2].poster_path
-                }}"
-                class="d-block w-100"
-                alt="..."
-                [routerLink]="[MOVIE_ROUTE, carouselItems[2].id]"
-              />
-            </div>
-            <h2>{{ carouselItems[2].original_title }}</h2>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="carousel-controls-left-right">
     <button
       class="carousel-control-prev"
       type="button"

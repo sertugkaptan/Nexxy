@@ -18,8 +18,8 @@
                         alt="..." [routerLink]="[MOVIE_ROUTE,r.id]">
                 </div>
                 <div class="col-lg-9 mt-4 mb-4">
-                    <h5>{{r.original_title}}</h5>
-                    <p>{{r.overview}}</p>
+                    <h5>{{r.original_title || 'Unknown Title'}}</h5>
+                    <p>{{r.overview || 'Unknown Description'}}</p>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
         <div class="row" *ngIf="r.poster_path">
             <img src="https://image.tmdb.org/t/p/original/{{r.poster_path}}" class="rowimg largeposter" alt="..."
                 [routerLink]="[MOVIE_ROUTE,r.id]">
+                
         </div>
     </div>
 </div>

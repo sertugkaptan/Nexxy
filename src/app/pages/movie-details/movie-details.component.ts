@@ -4,10 +4,12 @@ import { MovieApiServiceService } from '../../service/movie-api-service.service'
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafePipe } from '../../util/SafePipe';
+import {YOUTUBE_LINK,AUTO_PLAY} from '../../util/Constants';
+
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,SafePipe],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
 })
@@ -16,10 +18,9 @@ export class MovieDetailsComponent implements OnInit {
   detailResult: any;
   videoResult: any;
   castResult: any;
-  readonly youtubeLink: string = "https://www.youtube.com/embed/";
-  readonly autoPlay: string = "?autoplay=1&mute=1";
   ngOnInit(): void {
     const getParamId = this.router.snapshot.paramMap.get('id');
+    this.router.data.subscribe(({movie})=>this.detailResult=movie);
     this.constructMovieInformation(getParamId);
   }
 
@@ -38,8 +39,9 @@ export class MovieDetailsComponent implements OnInit {
   getVideo(id: any) {
     this.service.getMovieVideo(id).subscribe((result) => {
       result.results.forEach((element: any) => {
+        console.log(element);
         if (element.type == "Trailer") {
-          this.videoResult = new SafePipe(this.sanitizer).transform(this.youtubeLink + element.key + this.autoPlay);
+          this.videoResult = YOUTUBE_LINK + element.key + AUTO_PLAY
         }
       });
     })

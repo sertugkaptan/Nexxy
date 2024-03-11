@@ -1,9 +1,9 @@
-.carousel-inner {
-  height: 700px;
+#carouselExampleDark .carousel-inner {
+  height: 800px;
 }
 
-.carousel-inner .carousel-item img {
-  height: 700px;
+#carouselExampleDark .carousel-inner .carousel-item img {
+  height: 800px;
   object-fit: cover;
 }
 
@@ -12,54 +12,61 @@
   font-weight: bold;
 }
 
-.carousel-caption p {
+#carouselExampleDark .carousel-caption p {
   color: #ffffff;
 }
 
-.rowposter {
+.card {
+  background-color: black;
+}
+#trendingmoviecarousel {
   display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  align-items: center; /* Center align the items vertically */
+  justify-content: space-between; /* Add space between carousel and buttons */
+  width: 100%; /* Reduce the width of the carousel */
+  height: 30%; /* Reduce the height of the carousel */
+  margin: 0 auto; /* Center the carousel horizontally */
 }
 
-.rowimg {
-  max-height: 200px;
+#trendingmoviecarousel .carousel-inner {
+  width: 100%; /* Ensure the inner content stretches to the full width */
+  height: 100%; /* Ensure the inner content stretches to the full height */
+}
+
+#trendingmoviecarousel .carousel-control-prev,
+.carousel-control-next {
+  align-self: center; /* Center align the buttons vertically */
+}
+
+#trendingmoviecarousel img:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+}
+#trendingmoviecarousel img{
   object-fit: contain;
   width: 100%;
   box-sizing: content-box;
   transition: transform 450ms;
-  margin-right: 7px;
 }
 
-.rowimg:hover {
-  transform: scale(1.1);
-  cursor: grab;
-}
-
-.largeposter {
-  max-height: 300px;
-}
-.caption {
-  color: #ffffff;
-  font-size: 50px;
-}
-.card {
-  background-color: grey;
-}
-.card .row .col-md-4 img {
-  height: 500px;
+.video-container {
   position: relative;
+  display: inline-block;
 }
-.col-md-4 h2 {
-  color: red;
+
+.video-overlay {
   position: absolute;
-  text-align: center;
-  bottom: 10%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
 }
-/* #trendingmoviecarousel {
-  position: relative;
-} */
-/* .carousel-controls-left-right{
-  position: relative;
-  top: 50%;
-} */
+
+.video-overlay iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

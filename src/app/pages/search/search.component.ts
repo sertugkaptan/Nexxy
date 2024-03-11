@@ -9,31 +9,32 @@ import { MOVIE_ROUTE } from '../../app.routes';
   standalone: true,
   imports: [ReactiveFormsModule, SharedModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrl: './search.component.css',
 })
 export class SearchComponent implements OnInit {
   readonly MOVIE_ROUTE = MOVIE_ROUTE;
   searchResult: any;
   trendingMovies: any = [];
-  constructor(private service: MovieApiServiceService) { }
-  
+  constructor(private service: MovieApiServiceService) {}
+
   ngOnInit(): void {
     this.getTrendingMovies();
   }
 
   searchForm = new FormGroup({
-    'movieName': new FormControl(null)
-
+    movieName: new FormControl(null),
   });
 
   submitForm() {
-    this.service.searchMovieWithName(this.searchForm.value).subscribe((result) => {
-      this.searchResult = result.results;
-    })
+    this.service
+      .searchMovieWithName(this.searchForm.value)
+      .subscribe((result) => {
+        this.searchResult = result.results;
+      });
   }
   getTrendingMovies() {
     this.service.trendingMovieApiData().subscribe((result) => {
-      this.trendingMovies = result.results
-    })
+      this.trendingMovies = result.results;
+    });
   }
 }
