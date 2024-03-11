@@ -61,7 +61,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   playVideo(id: number): void {
-    this.showVideo = true;
+    this.carouselItems.forEach(item => {
+      if(item.id === id){
+        item.showVideo=true;
+      }
+    });
+
     this.service.getMovieVideo(id).subscribe( (result)=>{
       result.results.forEach((element: MovieVideo) => {
         if (element.type == "Trailer") {

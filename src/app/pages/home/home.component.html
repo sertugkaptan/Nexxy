@@ -57,9 +57,8 @@
                 <div class="card-img">
                   <div
                     class="video-container"
-                    (mouseleave)="playVideo(item.id)"
+                    (mouseenter)="playVideo(item.id)"
                   >
-                    <!-- Ensure item is properly accessed -->
                     <img
                       src="https://image.tmdb.org/t/p/original/{{
                         item.poster_path || ''
@@ -68,7 +67,7 @@
                       alt="..."
                       [routerLink]="[MOVIE_ROUTE, item.id]"
                     />
-                    <div *ngIf="showVideo" class="video-overlay">
+                    <div *ngIf="item.showVideo" class="video-overlay">
                       <iframe
                         *ngIf="youtubeUrl"
                         width="560"

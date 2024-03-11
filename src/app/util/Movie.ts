@@ -14,6 +14,7 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  showVideo:boolean;
 }
 
 export interface MovieVideo {
@@ -28,8 +29,11 @@ export interface MovieVideo {
   size: number;
   type: string;
 }
-export interface MovieVideosResolved{
-    movieVideo:MovieVideo[];
+
+export interface MovieDetailsResolved{
+    cast:any[];
+    movieVideo:MovieVideo|undefined;
+    movie:Movie|undefined;
     error?:string;
 }
 
