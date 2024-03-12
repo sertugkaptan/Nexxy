@@ -4,41 +4,65 @@ import {
   ResolveFn,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Observable, catchError, flatMap, forkJoin, map, of } from 'rxjs';
+import { Observable, catchError, forkJoin, map, mergeMap } from 'rxjs';
 import {
   Movie,
   MovieDetailsResolved,
   MovieResolved,
-  MovieVideo,
+  VideoInformation,
 } from '../util/Movie';
 import { MovieApiServiceService } from './movie-api-service.service';
 
-// Replace with your actual movie data service
-
-// export const MovieResolver: ResolveFn<MovieResolved[]> = (
+// export const MoviesResolver: ResolveFn<{
+//   trending: MovieDetailsResolved[];
+//   banner: MovieDetailsResolved;
+// }> = (
 //   _route: ActivatedRouteSnapshot,
 //   _state: RouterStateSnapshot
-// ): Observable<MovieResolved[]> | Promise<MovieResolved[]> => {
+// ): Observable<{
+//   trending: MovieDetailsResolved[];
+//   banner: MovieDetailsResolved;
+// }> => {
 //   const movieService = inject(MovieApiServiceService);
-//   const bannerMovies: MovieDetailsResolved[] = movieService
-//     .bannerApiData()
-//     .pipe(map((result) => getMovieDetails(movieService, result.results.id)));
-//   let trendingMovies:MovieDetailsResolved[] = [];
-//   movieService.trendingMovieApiData().subscribe((result) => {
-//     const movies = getMovieDetails(movieService, result.results.id);
-//     let movie = {
-//       cast:movies.cast,
-//       movieVideo:movies.movieVideo,
-//       movie:movies.movie
-//     }
 
-//     trendingMovies.push(movie);
-//   });
+//   const bannerMovieDetails$ = movieService.bannerApiData().pipe(
+//     // Combine movie, cast, and video using separate service calls within pipe
+//     map((movie) => ({
+//       movie,
+//       cast: movieService
+//         .getMovieCast(movie.id)
+//         .pipe(map((data) => data.cast.slice(0, 10) || [])),
+//       movieVideo: movieService
+//         .getMovieVideo(movie.id)
+//         .pipe(
+//           map((result) =>
+//             result.results.find(
+//               (element: VideoInformation) => element.type === 'Trailer'
+//             )
+//           )
+//         ),
+//     }))
+//   );
+//   const trendingMovies$ = movieService.trendingMovieApiData().pipe(
+//     map((data) => data.results.map((movie:Movie) => movieService.getMovieDetails(movie.id))),
+//     mergeMap((observables) => forkJoin(observables))
+//   );
+
 //   return forkJoin({
-//     bannerMovies: bannerMovies,
-//     trendingMovies: trendingMovies,
-//   });
+//     banner: bannerMovieDetails$,
+//     trending: trendingMovies$,
+//   }).pipe(
+//     map((data) => ({
+//       trending: data.trending.map((details) => ({
+//         ...details,
+//         cast: details.cast, // Assuming cast is already populated within details object
+//         movieVideo: details.movieVideo, // Assuming movieVideo is already populated within details object
+//       })),
+//       banner: data.banner,
+//     }))
+//   );
 // };
+
 export const MovieVideoResolver: ResolveFn<MovieDetailsResolved> = (
   _route: ActivatedRouteSnapshot,
   _state: RouterStateSnapshot
@@ -55,9 +79,9 @@ function getMovieDetails(
   movieService: MovieApiServiceService,
   id: string | null
 ): {
-  cast: Observable<any>;
-  movieVideo: Observable<any>;
-  movie: Observable<any>;
+  cast: Observable<any[]>;
+  movieVideo: Observable<VideoInformation>;
+  movie: Observable<Movie>;
 } {
   return {
     cast: movieService
@@ -68,10 +92,12 @@ function getMovieDetails(
       .pipe(
         map((result) =>
           result.results.find(
-            (element: MovieVideo) => element.type === 'Trailer'
+            (element: VideoInformation) => element.type === 'Trailer'
           )
         )
-      ),
-    movie: movieService.getMovie(id).pipe(map((data) => data)),
+      ) as Observable<VideoInformation>,
+    movie: movieService
+      .getMovie(id)
+      .pipe(map((data) => data)) as Observable<Movie>,
   };
 }

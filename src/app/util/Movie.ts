@@ -14,11 +14,10 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  showVideo?:boolean;
-  displayOverlay?:boolean;
+  showVideo:boolean;
 }
 
-export interface MovieVideo {
+export interface VideoInformation {
   id: string;
   iso_639_1: string;
   iso_3166_1: string;
@@ -32,14 +31,13 @@ export interface MovieVideo {
 }
 
 export interface MovieDetailsResolved{
-    cast?:any[];
-    movieVideo:MovieVideo|undefined;
+    cast:any[];
+    movieVideo:VideoInformation|undefined;
     movie:Movie|undefined;
     error?:string;
 }
 
 export interface MovieResolved {
-  trendingMovies: MovieDetailsResolved[]|null;
-  bannerMovies:MovieDetailsResolved[];
+  movie: Movie|null;
   error?: string;
 }

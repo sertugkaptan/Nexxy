@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
 import { AUTO_PLAY, YOUTUBE_LINK } from '../../util/Constants';
-import { Movie, MovieDetailsResolved, MovieVideo } from '../../util/Movie';
+import { Movie, MovieDetailsResolved, VideoInformation } from '../../util/Movie';
 import { SafePipe } from '../../util/SafePipe';
 
 @Component({
@@ -16,7 +16,7 @@ import { SafePipe } from '../../util/SafePipe';
 })
 export class MovieDetailsComponent implements OnInit {
   detailResult: Movie | undefined;
-  videoResult: MovieVideo | undefined;
+  videoResult: VideoInformation | undefined;
   castResult: any[] = [];
   youtubeLink: string = '';
 
@@ -36,7 +36,7 @@ export class MovieDetailsComponent implements OnInit {
     }
   }
 
-  getVideo(movieVideo: MovieVideo) {
+  getVideo(movieVideo: VideoInformation) {
     this.youtubeLink = YOUTUBE_LINK + movieVideo.key + AUTO_PLAY;
   }
 }

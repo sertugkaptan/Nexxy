@@ -1,22 +1,19 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   OnDestroy,
-  OnInit,
-  ViewChild,
+  OnInit
 } from '@angular/core';
-import { MovieApiServiceService } from '../../service/movie-api-service.service';
-import { SharedModule } from '../../util/SharedModule.module';
-import { MOVIE_ROUTE } from '../../app.routes';
-import { Movie, MovieVideo } from '../../util/Movie';
-import { Subscription, map } from 'rxjs';
-import { slideInAnimation } from '../../app.animation';
 import { Router, RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { slideInAnimation } from '../../app.animation';
+import { MOVIE_ROUTE } from '../../app.routes';
+import { MovieApiServiceService } from '../../service/movie-api-service.service';
 import { ChunkArrayPipe } from '../../util/ChunkArrayPipe';
-import { YOUTUBE_LINK, AUTO_PLAY } from '../../util/Constants';
+import { AUTO_PLAY, YOUTUBE_LINK } from '../../util/Constants';
+import { Movie, VideoInformation } from '../../util/Movie';
 import { SafePipe } from '../../util/SafePipe';
+import { SharedModule } from '../../util/SharedModule.module';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -63,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   playVideo(film:Movie): void {
     film.showVideo=true;
     this.service.getMovieVideo(film.id).subscribe( (result)=>{
-      result.results.forEach((element: MovieVideo) => {
+      result.results.forEach((element: VideoInformation) => {
         if (element.type == "Trailer") {
           this.youtubeUrl = YOUTUBE_LINK + element.key + AUTO_PLAY
         }
