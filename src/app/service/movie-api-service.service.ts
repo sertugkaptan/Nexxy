@@ -68,6 +68,7 @@ export class MovieApiServiceService {
       video: false,
       vote_average: 0,
       vote_count: 0,
+      showVideo:false
     };
   }
 }

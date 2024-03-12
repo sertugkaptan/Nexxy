@@ -7,16 +7,29 @@
         data-bs-interval="10000"
         *ngFor="let b of bannerResult; let i = index"
         [ngClass]="{ active: i === 0 }"
+        (mouseenter)="playVideo(b)"
+        (mouseleave)="b.showVideo=false"
       >
         <img
+          
           src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path || '' }}"
           class="d-block w-100"
           alt="..."
-          [routerLink]="[MOVIE_ROUTE, b.id]"
+          
         />
         <div class="carousel-caption d-none d-md-block">
           <h2>{{ b.original_title || "Unknown Title" }}</h2>
           <p style="font-size: 25px">{{ b.overview || "Unknown overview" }}</p>
+        </div>
+        <div *ngIf="b.showVideo" class="video-overlay">
+          <iframe
+            *ngIf="youtubeUrl"
+            width="560"
+            height="315"
+            [src]="youtubeUrl | safe"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
@@ -57,7 +70,8 @@
                 <div class="card-img">
                   <div
                     class="video-container"
-                    (mouseenter)="playVideo(item.id)"
+                    (mouseenter)="playVideo(item)"
+                    (mouseleave)="item.showVideo = false"
                   >
                     <img
                       src="https://image.tmdb.org/t/p/original/{{
@@ -65,16 +79,17 @@
                       }}"
                       class="d-block w-100"
                       alt="..."
-                      [routerLink]="[MOVIE_ROUTE, item.id]"
+                      
                     />
-                    <div *ngIf="item.showVideo" class="video-overlay">
+                    <div *ngIf="item.showVideo" class="video-overlay" >
+                      <div (click)="navigate(item)"></div>
                       <iframe
-                        *ngIf="youtubeUrl"
-                        width="560"
-                        height="315"
-                        [src]="youtubeUrl | safe"
-                        frameborder="0"
-                        allowfullscreen
+                      *ngIf="youtubeUrl"
+                      width="560"
+                      height="315"
+                      [src]="youtubeUrl | safe"
+                      frameborder="0"
+                      allowfullscreen
                       ></iframe>
                     </div>
                   </div>

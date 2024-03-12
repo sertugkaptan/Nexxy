@@ -17,14 +17,14 @@
 }
 
 .card {
-  background-color: black;
+  background-color: rgb(26, 25, 25);
 }
 #trendingmoviecarousel {
   display: flex;
   align-items: center; /* Center align the items vertically */
   justify-content: space-between; /* Add space between carousel and buttons */
   width: 100%; /* Reduce the width of the carousel */
-  height: 30%; /* Reduce the height of the carousel */
+  height: 50%; /* Reduce the height of the carousel */
   margin: 0 auto; /* Center the carousel horizontally */
 }
 
@@ -38,15 +38,16 @@
   align-self: center; /* Center align the buttons vertically */
 }
 
-#trendingmoviecarousel img:hover{
-  transform: scale(1.5);
+#trendingmoviecarousel img:hover {
+  transform: scale(1.1);
   cursor: pointer;
 }
-#trendingmoviecarousel img{
+#trendingmoviecarousel img {
   object-fit: contain;
   width: 100%;
   box-sizing: content-box;
   transition: transform 450ms;
+  border-radius: 8px; /* Adjust the value to control the roundness */
 }
 
 .video-container {
@@ -61,6 +62,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+  z-index: 1;
 }
 
 .video-overlay iframe {
@@ -69,4 +71,15 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+.overlay-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5%;
+  height: 5%;
+  color: red;
+  font-size: 24px;
+  z-index: 1;
+  cursor: pointer;
 }

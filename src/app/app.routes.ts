@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { SearchComponent } from './pages/search/search.component';
-import { MovieResolver, MovieVideoResolver } from './service/MovieResolver';
+import { MovieVideoResolver } from './service/MovieResolver';
 
 
 export const routes: Routes = [

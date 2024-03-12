@@ -14,7 +14,8 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  showVideo:boolean;
+  showVideo?:boolean;
+  displayOverlay?:boolean;
 }
 
 export interface MovieVideo {
@@ -31,13 +32,14 @@ export interface MovieVideo {
 }
 
 export interface MovieDetailsResolved{
-    cast:any[];
+    cast?:any[];
     movieVideo:MovieVideo|undefined;
     movie:Movie|undefined;
     error?:string;
 }
 
 export interface MovieResolved {
-  movie: Movie|null;
+  trendingMovies: MovieDetailsResolved[]|null;
+  bannerMovies:MovieDetailsResolved[];
   error?: string;
 }

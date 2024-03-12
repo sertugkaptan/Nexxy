@@ -13,7 +13,7 @@ import { MOVIE_ROUTE } from '../../app.routes';
 import { Movie, MovieVideo } from '../../util/Movie';
 import { Subscription, map } from 'rxjs';
 import { slideInAnimation } from '../../app.animation';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ChunkArrayPipe } from '../../util/ChunkArrayPipe';
 import { YOUTUBE_LINK, AUTO_PLAY } from '../../util/Constants';
 import { SafePipe } from '../../util/SafePipe';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   youtubeUrl: string = '';
   showVideo: boolean = false;
 
-  constructor(private service: MovieApiServiceService) {}
+  constructor(private router: Router, private service: MovieApiServiceService) {}
 
   ngOnInit(): void {
     this.bannerData();
@@ -60,19 +60,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  playVideo(id: number): void {
-    this.carouselItems.forEach(item => {
-      if(item.id === id){
-        item.showVideo=true;
-      }
-    });
-
-    this.service.getMovieVideo(id).subscribe( (result)=>{
+  playVideo(film:Movie): void {
+    film.showVideo=true;
+    this.service.getMovieVideo(film.id).subscribe( (result)=>{
       result.results.forEach((element: MovieVideo) => {
         if (element.type == "Trailer") {
           this.youtubeUrl = YOUTUBE_LINK + element.key + AUTO_PLAY
         }
       });
     })
+  }
+  navigate(film:Movie):void{
+    console.log('navi');
+    
+    this.router.navigate([MOVIE_ROUTE,film.id]);
   }
 }
