@@ -8,26 +8,26 @@
         *ngFor="let b of bannerResult; let i = index"
         [ngClass]="{ active: i === 0 }"
         (mouseenter)="playVideo(b)"
-        (mouseleave)="b.showVideo=false"
+        (mouseleave)="b.movie.showVideo=false"
       >
         <img
           
-          src="https://image.tmdb.org/t/p/original/{{ b.backdrop_path || '' }}"
+          src="https://image.tmdb.org/t/p/original/{{ b.movie.backdrop_path || '' }}"
           class="d-block w-100"
           alt="..."
           
         />
         <div class="carousel-caption d-none d-md-block">
-          <h2>{{ b.original_title || "Unknown Title" }}</h2>
-          <p style="font-size: 25px">{{ b.overview || "Unknown overview" }}</p>
+          <h2>{{ b.movie.original_title || "Unknown Title" }}</h2>
+          <p style="font-size: 25px">{{ b.movie.overview || "Unknown overview" }}</p>
         </div>
-        <div *ngIf="b.showVideo" class="video-overlay">
+        <div *ngIf="b.movie.showVideo" class="video-overlay">
           <iframe
             *ngIf="youtubeUrl"
             width="560"
             height="315"
             [src]="youtubeUrl | safe"
-            frameborder="0"
+            frameborder="50"
             allowfullscreen
           ></iframe>
         </div>
@@ -66,23 +66,24 @@
         <div class="carousel-item" [ngClass]="{ active: i === 0 }">
           <div class="row">
             <div class="col-md-2" *ngFor="let item of slice">
-              <div class="card">
+              <div class="card" >
                 <div class="card-img">
                   <div
                     class="video-container"
                     (mouseenter)="playVideo(item)"
-                    (mouseleave)="item.showVideo = false"
+                    (mouseleave)="item.movie.showVideo= false"
+                    
                   >
                     <img
                       src="https://image.tmdb.org/t/p/original/{{
-                        item.poster_path || ''
+                        item.movie.poster_path || ''
                       }}"
                       class="d-block w-100"
                       alt="..."
                       
                     />
-                    <div *ngIf="item.showVideo" class="video-overlay" >
-                      <div (click)="navigate(item)"></div>
+                    <div *ngIf="item.movie.showVideo" class="video-overlay" style="cursor: pointer;">
+                      <div (click)="navigate(item.movie)" ></div>
                       <iframe
                       *ngIf="youtubeUrl"
                       width="560"

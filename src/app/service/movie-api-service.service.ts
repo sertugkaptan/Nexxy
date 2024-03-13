@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, map } from 'rxjs';
-import { Movie, MovieDetailsResolved, VideoInformation } from '../util/Movie';
+import { MovieDetails } from '../Entities/moviedetails/MovieDetails';
+import { VideoInformation } from '../Entities/videoinformation/VideoInformation';
 
 @Injectable({
   providedIn: 'root',
@@ -51,27 +52,7 @@ export class MovieApiServiceService {
     );
   }
 
-  initializeMovie(): Movie {
-    return {
-      adult: false,
-      backdrop_path: '',
-      genre_ids: [],
-      id: 0,
-      media_type: '',
-      original_language: '',
-      original_title: '',
-      overview: '',
-      popularity: 0,
-      poster_path: '',
-      release_date: new Date(),
-      title: '',
-      video: false,
-      vote_average: 0,
-      vote_count: 0,
-      showVideo:false
-    };
-  }
-  getMovieDetails(movieId: number): Observable<MovieDetailsResolved> {
+  getMovieDetails(movieId: number): Observable<MovieDetails> {
     return forkJoin({
       movie: this.getMovie(movieId), // Assuming getMovie returns movie details
       cast: this.getMovieCast(movieId).pipe(map((data) => data.cast.slice(0, 10)  || [])),

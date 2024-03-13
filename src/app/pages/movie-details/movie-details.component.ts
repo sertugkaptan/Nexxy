@@ -4,8 +4,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from '../../service/movie-api-service.service';
 import { AUTO_PLAY, YOUTUBE_LINK } from '../../util/Constants';
-import { Movie, MovieDetailsResolved, VideoInformation } from '../../util/Movie';
 import { SafePipe } from '../../util/SafePipe';
+import { VideoInformation } from '../../Entities/videoinformation/VideoInformation';
+import { Movie } from '../../Entities/movie/Movie';
+import { MovieDetails } from '../../Entities/moviedetails/MovieDetails';
 
 @Component({
   selector: 'app-movie-details',
@@ -26,7 +28,7 @@ export class MovieDetailsComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
   ngOnInit(): void {
-    const movieDetails: MovieDetailsResolved =
+    const movieDetails: MovieDetails =
       this.router.snapshot.data['movieDetails'];
     if (movieDetails) {
       this.castResult = movieDetails.cast!;
