@@ -61,7 +61,7 @@
     <div class="carousel-inner">
       <div
         class="trendingcarousel"
-        *ngFor="let slice of carouselItems | chunkArray : 6; let i = index"
+        *ngFor="let slice of carouselItems; let i = index"
       >
         <div class="carousel-item" [ngClass]="{ active: i === 0 }">
           <div class="row">
@@ -82,18 +82,17 @@
                       alt="..."
                       
                     />
-                    <div *ngIf="item.movie.showVideo" class="video-overlay" style="cursor: pointer;">
-                      <div (click)="navigate(item.movie)" ></div>
+                    <div *ngIf="item.movie.showVideo" class="video-overlay">
                       <iframe
-                      *ngIf="youtubeUrl"
-                      width="560"
-                      height="315"
-                      [src]="youtubeUrl | safe"
-                      frameborder="0"
-                      allowfullscreen
+                        *ngIf="youtubeUrl"
+                        width="560"
+                        height="315"
+                        [src]="youtubeUrl | safe"
+                        frameborder="0"
+                        allowfullscreen
                       ></iframe>
+                      <div class="clickable-overlay" (click)="navigate(item.movie)"></div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>

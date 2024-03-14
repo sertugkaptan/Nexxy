@@ -23,29 +23,30 @@ import { MovieDetails } from '../../Entities/moviedetails/MovieDetails';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   readonly MOVIE_ROUTE = MOVIE_ROUTE;
-  carouselItems: MovieDetails[] = [];
-  nextItems: Movie[] = [];
+  carouselItems: MovieDetails[][] = [];
   bannerResult: MovieDetails[] = [];
-  trendingResult: Movie[] = [];
   bannerSub: Subscription | undefined;
   trendingSub: Subscription | undefined;
   state: string = 'void';
   youtubeUrl: string = '';
   showVideo: boolean = false;
-
+  pipe: ChunkArrayPipe;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: MovieApiServiceService
-  ) {}
+  ) {
+    this.pipe = new ChunkArrayPipe();
+  }
 
   ngOnInit(): void {
     const movieDetails: MovieDetailsResolved = this.route.snapshot.data['data'];
-    movieDetails.bannerMovies.subscribe((data) => {
+    this.bannerSub = movieDetails.bannerMovies.subscribe((data) => {
       this.bannerResult = data;
     });
-    movieDetails.trendingMovies.subscribe((data) => {
-      this.carouselItems = data
+    this.trendingSub = movieDetails.trendingMovies.subscribe((data) => {
+      this.carouselItems = this.pipe.transform(data, 6);
+      console.log('carousel', this.carouselItems);
     });
   }
 
@@ -53,25 +54,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.bannerSub?.unsubscribe();
     this.trendingSub?.unsubscribe();
   }
-  bannerData() {
-    this.bannerSub = this.service.bannerApiData().subscribe((data) => {
-      this.bannerResult = data.results!;
-    });
-  }
 
-  trendingData(){
-    this.trendingSub = this.service.trendingMovieApiData().subscribe((data) => {
-      this.carouselItems = data.results!;
-    });
-  }
-
-  playVideo(film:MovieDetails): void {
-      film.movie!.showVideo = true;
-    this.youtubeUrl = YOUTUBE_LINK+film.movieVideo?.key+AUTO_PLAY
+  playVideo(film: MovieDetails): void {
+    film.movie!.showVideo = true;
+    this.youtubeUrl = YOUTUBE_LINK + film.movieVideo?.key + AUTO_PLAY;
   }
   navigate(film: Movie): void {
-    console.log('navi');
-
     this.router.navigate([MOVIE_ROUTE, film.id]);
   }
 }
