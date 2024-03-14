@@ -1,23 +1,29 @@
 <!-- navbar start -->
-<nav class="navbar navbar-expand-lg fixed-top " [ngStyle]="navbg">
-  <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="[HOME_ROUTE]">Nexxy</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="[HOME_ROUTE]">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="[SEARCH_ROUTE]">Search</a>
-        </li>
-      </ul>
+<div *ngIf="displayNavbar">
+  <nav class="navbar navbar-expand-lg fixed-top " >
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="[HOME_ROUTE]">Nexxy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="[HOME_ROUTE]">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="[SEARCH_ROUTE]">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="[LOGIN_ROUTE]">Login</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+
+</div>
 <!-- navbar end -->
 <router-outlet>
 
